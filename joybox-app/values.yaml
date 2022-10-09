@@ -12,6 +12,10 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
+env: {}
+secrets:
+  env: {}
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -30,7 +34,7 @@ readinessProbe:
   httpGet:
     path: /
     port: http
-    
+
 podAnnotations: {}
 
 podSecurityContext: {}
