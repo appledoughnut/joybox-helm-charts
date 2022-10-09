@@ -30,14 +30,7 @@ readinessProbe:
   httpGet:
     path: /
     port: http
-
-env:
-  TEST_ENV_NORMAL: jonghoon
-
-secrets:
-  env:
-    TEST_ENV_SECRET: jonghoon
-
+    
 podAnnotations: {}
 
 podSecurityContext: {}
