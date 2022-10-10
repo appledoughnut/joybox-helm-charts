@@ -1,35 +1,30 @@
-name: Release
+name: Release Charts
+
 on:
   push:
-    branches: [ main ]
-env:
-  AWS_REGION: ap-northeast-2
+    branches:
+      - main
+
 jobs:
-  build:
-    name: Chart release
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          fetch-depth: 0
 
-      - uses: technote-space/get-diff-action@v6
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
         with:
-          PATTERNS: |
-            **/Chart.yaml
+          version: v3.8.1
 
-      - name: print diff
-        run: echo ${{ env.GIT_DIFF }}
-
-      - name: Helm release
-        uses: shellbear/helm-release-action@v0.1
-        if: contains(${{ env.GIT_DIFF}}, 'joybox-app')
-        with:
-          repo: s3://joybox-helm-charts
-          chart: ./joybox-app
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.4.0
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
