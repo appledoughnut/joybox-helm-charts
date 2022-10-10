@@ -28,7 +28,7 @@ jobs:
         run: echo ${{ env.GIT_DIFF }}
 
       - name: Helm release
-        uses: shellbear/helm-release-action@0.1
+        uses: shellbear/helm-release-action@v0.1
         if: contains(${{ env.GIT_DIFF}}, 'joybox-app')
         with:
           repo: s3://joybox-helm-charts
