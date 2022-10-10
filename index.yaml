@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  joybox-app:
+  - apiVersion: v2
+    created: "2022-10-10T01:13:42.290751003Z"
+    description: A Helm chart for Kubernetes
+    digest: bbf0128c2470f875c63f0e5105345fa43fff1c15e8d293522f6f7e47261ec6e4
+    name: joybox-app
+    type: application
+    urls:
+    - https://github.com/appledoughnut/joybox-helm-charts/releases/download/joybox-app-0.1.12/joybox-app-0.1.12.tgz
+    version: 0.1.12
+generated: "2022-10-10T01:13:42.290806704Z"
